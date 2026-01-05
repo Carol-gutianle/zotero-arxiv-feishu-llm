@@ -12,7 +12,7 @@ arxiv:
 zotero:
   library_id: "1234567"           # zotero library id
   api_key: "your-zotero-api-key"  # zotero api key
-  library_type: "user"            # "user" or "group"
+  library_type: "group"            # "user" or "group"
   item_types:
     - conferencePaper
     - journalArticle
