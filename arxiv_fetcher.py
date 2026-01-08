@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 
 import arxiv
 import feedparser
-from time import time
+import time
 
 
 def _extract_new_ids(arxiv_query: str, only_new: bool = True, days_back: Optional[int] = 1) -> List[str]:
