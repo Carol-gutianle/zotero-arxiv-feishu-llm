@@ -46,7 +46,7 @@ def fetch_daily_arxiv(
     if max_results > 0:
         ids = ids[:max_results]
 
-    client = client or arxiv.Client(num_retries=3, delay_seconds=3)
+    client = client or arxiv.Client(num_retries=3, delay_seconds=10)
     results: List[Dict] = []
     for i in range(0, len(ids), 20):
         search = arxiv.Search(id_list=ids[i : i + 20])
