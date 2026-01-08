@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 
 import arxiv
 import feedparser
+from time import time
 
 
 def _extract_new_ids(arxiv_query: str, only_new: bool = True, days_back: Optional[int] = 1) -> List[str]:
@@ -50,6 +51,7 @@ def fetch_daily_arxiv(
     results: List[Dict] = []
     for i in range(0, len(ids), 20):
         search = arxiv.Search(id_list=ids[i : i + 20])
+        time.sleep(10)
         for res in client.results(search):
             results.append(
                 {
