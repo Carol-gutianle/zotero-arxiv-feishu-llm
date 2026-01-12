@@ -14,7 +14,7 @@ class LLMScorer:
         self.model = model
         self.temperature = temperature
 
-    def score(self, paper: Dict[str, Any], query: str) -> Dict[str, Any]:
+    def score(self, paper: Dict[str, Any]) -> Dict[str, Any]:
         """
         Score a single paper. Returns a dict with `match` (bool), `score` (float), `reason` (str).
         """
@@ -24,7 +24,6 @@ class LLMScorer:
         tags = ", ".join(paper.get("tags") or []) or "N/A"
         prompt = (
             "你是资深学术助手，需评估一篇论文与用户需求的相关性和质量评估，并给出简短理由。\n"
-            f"用户需求: {query}\n"
             "论文元信息：\n"
             f"- 标题: {title}\n"
             f"- 摘要: {summary}\n"
