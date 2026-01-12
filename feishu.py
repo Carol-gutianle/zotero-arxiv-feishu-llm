@@ -31,6 +31,8 @@ def _paper_md(idx: int, paper: Dict[str, str]) -> str:
     title = paper.get("title", "Untitled")
     link = paper.get("link") or paper.get("url")
     score = paper.get("score")
+    quality = paper.get("quality")
+    quality_text = f"{quality:.2f}" if isinstance(quality, (int, float)) else "N/A"
     score_text = f"{score:.2f}" if isinstance(score, (int, float)) else "N/A"
     stars = _score_to_stars(score if isinstance(score, (int, float)) else None)
     abstract = paper.get("abstract") or ""
@@ -39,6 +41,7 @@ def _paper_md(idx: int, paper: Dict[str, str]) -> str:
     authors = paper.get("authors") or []
     tags = paper.get("tags") or []
     keywords = ", ".join(tags[:6])
+    reasons = paper.get("reason")
     if authors:
         if len(authors) <= 5:
             author_line = ", ".join(authors)
@@ -67,6 +70,9 @@ def _paper_md(idx: int, paper: Dict[str, str]) -> str:
         lines.append(f"摘要(中文): {abstract_zh}")
     elif abstract:
         lines.append(f"摘要: {abstract}")
+    # TODO:
+    lines.append(f"质量评估（仅代表GPT个模型意见）: {quality}")
+    lines.append(f"推荐理由: {reasons}")
     return "\n".join(lines)
 
 
