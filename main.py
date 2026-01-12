@@ -93,6 +93,9 @@ def enrich_with_llm(papers: List[Dict], scorer: LLMScorer, query: Dict[str, str]
                 target_lang=tldr_lang,
                 max_words=tldr_max_words,
             )
+        score = scorer.score(paper)
+        enriched["quality"] = score["quality"]
+        enriched["reason"] = score["reason"]
         results.append(enriched)
     return results
 
