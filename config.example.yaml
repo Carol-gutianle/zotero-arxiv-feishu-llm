@@ -29,7 +29,7 @@ embedding:
   model: "avsolatorio/GIST-small-Embedding-v0"
 
 query:
-  max_results: 10
+  max_results: 20
   max_corpus: 250  # max number of Zotero items for similarity matching
   include_abstract: true
   translate_abstract: true
