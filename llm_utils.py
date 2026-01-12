@@ -39,7 +39,7 @@ class LLMScorer:
         )
 
         response = self.client.chat.completions.create(
-            model=self.model,
+            model="gpt-4-0613",
             messages=[
                 {
                     "role": "system",
