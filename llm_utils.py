@@ -23,7 +23,7 @@ class LLMScorer:
         collections = ", ".join(paper.get("collections") or []) or "N/A"
         tags = ", ".join(paper.get("tags") or []) or "N/A"
         prompt = (
-            "你是资深学术助手，需评估一篇论文与用户需求的相关性，并给出简短理由。\n"
+            "你是资深学术助手，需评估一篇论文与用户需求的相关性和质量评估，并给出简短理由。\n"
             f"用户需求: {query}\n"
             "论文元信息：\n"
             f"- 标题: {title}\n"
@@ -31,10 +31,11 @@ class LLMScorer:
             f"- 标签: {tags}\n"
             f"- 集合: {collections}\n\n"
             "输出严格的 JSON（仅一行）：\n"
-            '{"match": true/false, "score": 0.00, "reason": "中文理由，≤30字"}\n'
+            '{"match": true/false, "score": 0.00, "quality": 0.0, "reason": "推荐理由，≤30字"}\n'
             "规则：\n"
             "- score 在 0-1，0=完全不相关或信息不足，1=高度契合；不确定时 score<=0.2 且 match=false。\n"
             "- 关注主题/方法/应用场景的匹配度，避免仅凭关键词。\n"
+            "- quality 在0-1, 质量高的体现为：1. 已经被NeurIPS、ICML等AI安全方向顶级会议或期刊接收。2. 作者来自知名机构，比如DeepMind、Anthropic、MIT。3. 作者为AI安全方向知名学者。\n"
             "- reason 只写核心匹配/不匹配点，不要多余前后缀。"
         )
 
@@ -55,6 +56,7 @@ class LLMScorer:
         try:
             parsed = json.loads(content)
             parsed["score"] = float(parsed.get("score", 0.0))
+            parsed["quality"] = float(parsed.get("quality", 0.0))
             parsed["match"] = bool(parsed.get("match", False))
             parsed["reason"] = str(parsed.get("reason", "")).strip()
             return parsed
