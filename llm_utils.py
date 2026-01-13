@@ -43,7 +43,7 @@ class LLMScorer:
             messages=[
                 {
                     "role": "system",
-                    "content": "评价这篇文章如何与用户的研究领域相关性以及质量. Keep output as JSON only.",
+                    "content": "评价这篇文章的质量如何. Keep output as JSON only.",
                 },
                 {"role": "user", "content": prompt},
             ],
