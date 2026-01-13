@@ -30,7 +30,7 @@ class LLMScorer:
             f"- 标签: {tags}\n"
             f"- 集合: {collections}\n\n"
             "输出严格的 JSON（仅一行）：\n"
-            '{"match": true/false, "score": 0.00, "quality": 0.0, "reason": "推荐理由，≤30字"}\n'
+            '{"match": true/false, "score": 0.00, "quality": 0.0, "reason": "推荐理由，≤50字"}\n'
             "规则：\n"
             "- score 在 0-1，0=完全不相关或信息不足，1=高度契合；不确定时 score<=0.2 且 match=false。\n"
             "- 关注主题/方法/应用场景的匹配度，避免仅凭关键词。\n"
@@ -43,7 +43,7 @@ class LLMScorer:
             messages=[
                 {
                     "role": "system",
-                    "content": "Rate how relevant a paper is to the user request. Keep output as JSON only.",
+                    "content": "评价这篇文章如何与用户的研究领域相关性以及质量. Keep output as JSON only.",
                 },
                 {"role": "user", "content": prompt},
             ],
