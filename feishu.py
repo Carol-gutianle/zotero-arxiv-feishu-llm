@@ -72,7 +72,7 @@ def _paper_md(idx: int, paper: Dict[str, str]) -> str:
         lines.append(f"摘要: {abstract}")
     # TODO:
     lines.append(f"质量评估（仅代表GPT个模型意见）: {quality}")
-    lines.append(f"推荐理由: {reasons}")
+    lines.append(f"评价: {reasons}")
     return "\n".join(lines)
 
 
